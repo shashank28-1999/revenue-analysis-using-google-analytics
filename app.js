@@ -24,7 +24,7 @@ const PRODUCTS = [
   },
   {
     id: 'google-timbuk2-backpack',
-    name: 'Google × Timbuk2 Backpack',
+    name: 'Google Backpack',
     category: 'Bags',
     price: 89.99,
     localImage: 'assets/google-timbuk2-backpack.png',
@@ -214,8 +214,9 @@ function fireBeginCheckout() {
 function firePurchase(orderId) {
   if (typeof gtag === 'undefined') return;
   const subtotal = getCartTotal();
-  const tax      = subtotal * 0.18;
-  const total    = subtotal + tax;
+  const rawTotal = subtotal * 1.18;
+  const total    = Math.ceil(rawTotal);
+  const tax      = total - subtotal;
 
   const items = cart.map((item, i) => ({
     item_id:       item.id,
@@ -446,8 +447,9 @@ function renderCheckoutSummary() {
   `).join('');
 
   const subtotal = getCartTotal();
-  const tax      = subtotal * 0.18;
-  const total    = subtotal + tax;
+  const rawTotal = subtotal * 1.18;
+  const total    = Math.ceil(rawTotal);
+  const tax      = total - subtotal;
 
   if (subtotalEl) subtotalEl.textContent = `$${subtotal.toFixed(2)}`;
   if (taxEl)      taxEl.textContent      = `$${tax.toFixed(2)}`;

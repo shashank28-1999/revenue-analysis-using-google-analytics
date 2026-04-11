@@ -862,3 +862,27 @@ body {
   text-align: center;
   padding: 10px;
 }
+.card-input-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.card-input-wrap input {
+  width: 100%;
+  padding-right: 110px;
+}
+
+.card-logos {
+  position: absolute;
+  right: 12px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.card-logos img {
+  height: 14px;
+  width: auto;
+  object-fit: contain;
+}
