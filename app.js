@@ -469,7 +469,7 @@ function generateOrderId() {
 
   const formattedDateTime = `${day}-${month}-${year}-${String(hours).padStart(2, '0')}-${minutes}-${ampm}`;
 
-  const random = Math.random().toString(36).substr(2, 5).toUpperCase();
+  const random = Math.random().toString(36).substr(2, 10).toUpperCase();
 
   return `ORD-${formattedDateTime}-${random}`;
 }

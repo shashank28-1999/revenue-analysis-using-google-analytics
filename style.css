@@ -402,17 +402,25 @@ body {
 }
 
 .close-btn {
-  background: var(--light);
-  border: none;
-  border-radius: 50%;
-  width: 32px; height: 32px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 6px 14px;
   cursor: pointer;
-  font-size: 0.9rem;
+  font-size: 0.82rem;
+  font-family: var(--font-display);
+  font-weight: 600;
   color: var(--mid);
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background 0.2s;
+  transition: all 0.2s;
+}
+
+.close-btn:hover {
+  background: #1a1a1a !important;
+  color: white !important;
+  border-color: #1a1a1a !important;
 }
 
 .close-btn:hover { background: var(--border); }
