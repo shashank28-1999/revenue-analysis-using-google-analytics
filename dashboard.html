@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Revenue Dashboard</title>
+  <link rel="icon" type="image/png" href="favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@300;400;500;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="dashboard.css" />
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-JQNYGB0H1J"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-JQNYGB0H1J');
+  </script>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="dash-header">
+    <div class="dash-header-inner">
+      <a href="index.html" class="dash-logo">
+        <span style="color:#4285F4">G</span><span style="color:#EA4335">o</span><span style="color:#FBBC05">o</span><span style="color:#4285F4">g</span><span style="color:#34A853">l</span><span style="color:#EA4335">e</span>
+        <span class="dash-logo-label">Revenue Dashboard</span>
+      </a>
+      <div class="dash-nav">
+        <a href="store.html">← Back to Store</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- INTRO -->
+  <section class="dash-intro">
+    <div class="dash-intro-inner">
+      <span class="dash-tag">Live Analytics</span>
+      <h1 class="dash-title">Revenue Insights</h1>
+      <p class="dash-sub">Real-time e-commerce analytics powered by Google Analytics and Looker Studio. Data updates every few hours as transactions are processed.</p>
+      <div class="dash-meta">
+        <div class="dash-meta-item">
+          <span class="meta-dot" style="background:#4285F4"></span>
+          Powered by GA4
+        </div>
+        <div class="dash-meta-item">
+          <span class="meta-dot" style="background:#34A853"></span>
+          Live Data
+        </div>
+        <div class="dash-meta-item">
+          <span class="meta-dot" style="background:#EA4335"></span>
+          Looker Studio
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DASHBOARD EMBED -->
+  <section class="dash-embed-section">
+    <div class="dash-embed-wrap">
+      <iframe
+        src="https://lookerstudio.google.com/embed/reporting/e06f890f-0ce7-431f-a39a-65d5c64e82df/page/rmtuF"
+        width="100%"
+        height="800"
+        frameborder="0"
+        allowfullscreen
+        sandbox="allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"
+      ></iframe>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="dash-footer">
+    <div class="dash-footer-inner">
+      <p>Built by Google Lookerstudio</p>
+    </div>
+  </footer>
+
+</body>
+</html>
