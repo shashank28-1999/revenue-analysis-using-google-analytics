@@ -492,10 +492,32 @@ function placeOrder() {
   if (orderEl) orderEl.textContent = orderId;
   if (modal)   modal.style.display = 'flex';
 
+  // Clear cart
   setTimeout(() => {
     cart = [];
     saveCart();
+    updateCartUI();
   }, 1500);
+
+  // Countdown on Back to Store button
+  const backBtn = document.querySelector('.success-modal .place-order-btn');
+  if (backBtn) {
+    backBtn.style.pointerEvents = 'none';
+    backBtn.style.opacity = '0.6';
+    let count = 3;
+    backBtn.textContent = `Back to Store (${count}s)`;
+    const timer = setInterval(() => {
+      count--;
+      if (count > 0) {
+        backBtn.textContent = `Back to Store (${count}s)`;
+      } else {
+        clearInterval(timer);
+        backBtn.textContent = 'Back to Store';
+        backBtn.style.pointerEvents = 'auto';
+        backBtn.style.opacity = '1';
+      }
+    }, 1000);
+  }
 }
 
 // ============================================
