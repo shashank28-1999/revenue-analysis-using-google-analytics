@@ -388,8 +388,11 @@ function placeOrder() {
   if (modal)   modal.style.display = 'flex';
 
   // Clear cart after purchase
-  cart = [];
-  saveCart();
+  // Small delay so GA event finishes sending before cart clears
+  setTimeout(() => {
+    cart = [];
+    saveCart();
+  }, 1500);
 }
 
 // ============================================
