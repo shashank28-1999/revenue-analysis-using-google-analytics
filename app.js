@@ -2,8 +2,7 @@
 //  GOOGLE MERCH STORE — APP LOGIC + GA EVENTS
 // ============================================
 
-// Replace G-XXXXXXXXXX everywhere with your real Measurement ID
-const GA_ID = 'G-XXXXXXXXXX';
+const GA_ID = 'G-JQNYGB0H1J';
 
 // ============================================
 //  PRODUCT CATALOGUE
@@ -14,63 +13,127 @@ const PRODUCTS = [
     name: 'Google Water Bottle',
     category: 'Accessories',
     price: 34.99,
-    image: 'https://lh3.googleusercontent.com/d/1775880906786_image.png',
-    localImage: 'assets/bottle.png',
+    localImage: 'assets/google-water-bottle.png',
   },
   {
     id: 'google-cloud-mug',
     name: 'Google Cloud Mug',
     category: 'Accessories',
     price: 24.99,
-    localImage: 'assets/mug.png',
+    localImage: 'assets/google-cloud-mug.png',
   },
   {
     id: 'google-timbuk2-backpack',
     name: 'Google × Timbuk2 Backpack',
     category: 'Bags',
     price: 89.99,
-    localImage: 'assets/backpack.png',
+    localImage: 'assets/google-timbuk2-backpack.png',
   },
   {
     id: 'google-cloud-notebook',
     name: 'Google Cloud Notebook',
     category: 'Stationery',
     price: 19.99,
-    localImage: 'assets/notebook.png',
+    localImage: 'assets/google-cloud-notebook.png',
   },
   {
     id: 'android-figure',
     name: 'Android Collectible Figure',
     category: 'Collectibles',
     price: 44.99,
-    localImage: 'assets/android.png',
+    localImage: 'assets/android-figure.png',
   },
   {
     id: 'google-longsleeve',
     name: 'Google Long Sleeve Tee',
     category: 'Apparel',
     price: 39.99,
-    localImage: 'assets/longsleeve.png',
+    localImage: 'assets/google-longsleeve.png',
   },
   {
     id: 'google-tshirt',
     name: 'Google Classic T-Shirt',
     category: 'Apparel',
     price: 29.99,
-    localImage: 'assets/tshirt.png',
+    localImage: 'assets/google-tshirt.png',
+  },
+  {
+    id: 'google-meadow-planter',
+    name: 'Google Meadow Planter',
+    category: 'Home & Garden',
+    price: 29.99,
+    localImage: 'assets/google-meadow-planter.png',
+  },
+  {
+    id: 'chrome-dino-collectible',
+    name: 'Chrome Dino Dark Mode Collectible',
+    category: 'Collectibles',
+    price: 49.99,
+    localImage: 'assets/chrome-dino-collectible.png',
+  },
+  {
+    id: 'google-wood-cube-puzzle',
+    name: 'Google Wood Cube Puzzle',
+    category: 'Toys & Games',
+    price: 34.99,
+    localImage: 'assets/google-wood-cube-puzzle.png',
+  },
+  {
+    id: 'google-maps-wheat-pen',
+    name: 'Google Maps Wheat Pen',
+    category: 'Stationery',
+    price: 12.99,
+    localImage: 'assets/google-maps-wheat-pen.png',
+  },
+  {
+    id: 'google-play-sticker',
+    name: 'Google Play Sticker Pack',
+    category: 'Stationery',
+    price: 8.99,
+    localImage: 'assets/google-play-sticker.png',
+  },
+  {
+    id: 'google-cloud-cap',
+    name: 'Google Cloud Cap',
+    category: 'Apparel',
+    price: 34.99,
+    localImage: 'assets/google-cloud-cap.png',
+  },
+  {
+    id: 'google-bike-magnet',
+    name: 'Google Bike Eco Wood Magnet',
+    category: 'Accessories',
+    price: 9.99,
+    localImage: 'assets/google-bike-magnet.png',
+  },
+  {
+    id: 'google-ombre-green-pen',
+    name: 'Google Ombre Green Pen',
+    category: 'Stationery',
+    price: 11.99,
+    localImage: 'assets/google-ombre-green-pen.png',
   },
 ];
 
-// Map product IDs to the uploaded image filenames
-// We'll use placeholder color blocks since images are local screenshots
+// ============================================
+//  PRODUCT COLORS (fallback if no image)
+// ============================================
 const PRODUCT_COLORS = {
-  'google-water-bottle':    '#1a1a1a',
-  'google-cloud-mug':       '#f5e6d3',
-  'google-timbuk2-backpack':'#1e3a5f',
-  'google-cloud-notebook':  '#9ca3af',
-  'android-figure':         '#34A853',
-  'google-longsleeve':      '#1e3a8a',
-  'google-tshirt':          '#111111',
+  'google-water-bottle':      '#1a1a1a',
+  'google-cloud-mug':         '#f5e6d3',
+  'google-timbuk2-backpack':  '#1e3a5f',
+  'google-cloud-notebook':    '#9ca3af',
+  'android-figure':           '#34A853',
+  'google-longsleeve':        '#1e3a8a',
+  'google-tshirt':            '#111111',
+  'google-meadow-planter':    '#4a7c59',
+  'chrome-dino-collectible':  '#1a1a2e',
+  'google-wood-cube-puzzle':  '#a0522d',
+  'google-maps-wheat-pen':    '#c8a951',
+  'google-play-sticker':      '#4285F4',
+  'google-cloud-cap':         '#34A853',
+  'google-bike-magnet':       '#6b7280',
+  'google-ombre-green-pen':   '#2d6a4f',
 };
 
 // ============================================
@@ -96,7 +159,7 @@ function gaItem(product, index = 0) {
     item_category: product.category,
     price:         product.price,
     index:         index,
-    quantity:      1,
+    quantity:      product.qty || 1,
   };
 }
 
@@ -114,10 +177,10 @@ function fireAddToCart(product) {
   if (typeof gtag === 'undefined') return;
   gtag('event', 'add_to_cart', {
     currency: 'USD',
-    value:    product.price,
+    value:    product.price * product.qty,
     items:    [gaItem(product)],
   });
-  console.log('[GA] add_to_cart fired:', product.name);
+  console.log('[GA] add_to_cart fired:', product.name, 'qty:', product.qty);
 }
 
 function fireRemoveFromCart(product) {
@@ -179,11 +242,13 @@ function firePurchase(orderId) {
 // ============================================
 function getProductEmoji(category) {
   const map = {
-    'Accessories':  '☕',
+    'Accessories':  '🎯',
     'Bags':         '🎒',
-    'Stationery':   '📓',
+    'Stationery':   '✏️',
     'Collectibles': '🤖',
     'Apparel':      '👕',
+    'Home & Garden':'🌿',
+    'Toys & Games': '🧩',
   };
   return map[category] || '🛍️';
 }
@@ -192,24 +257,28 @@ function renderProducts() {
   const grid = document.getElementById('productsGrid');
   if (!grid) return;
 
+  // Update item count
+  const countEl = document.querySelector('.section-header p');
+  if (countEl) countEl.textContent = `${PRODUCTS.length} items`;
+
   grid.innerHTML = PRODUCTS.map((p, i) => `
-    <div class="product-card" style="animation: fadeUp 0.4s ease both; animation-delay: ${i * 0.07}s">
-      <div class="card-accent"></div>
-      <div class="card-img-wrap" style="background: ${PRODUCT_COLORS[p.id]}11">
+    <div class="product-card" style="animation: fadeUp 0.4s ease both; animation-delay: ${i * 0.05}s">
+      <div class="card-accent" style="background:${PRODUCT_COLORS[p.id]}"></div>
+      <div class="card-img-wrap" style="background:${PRODUCT_COLORS[p.id]}11">
         <img
-          src="assets/${p.id}.png"
+          src="${p.localImage}"
           alt="${p.name}"
           onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
           style="max-height:160px; max-width:100%; object-fit:contain;"
         />
         <div style="
-          display: none;
-          width: 120px; height: 120px;
-          background: ${PRODUCT_COLORS[p.id]};
-          border-radius: 12px;
-          align-items: center; justify-content: center;
-          font-size: 3rem;
-          box-shadow: 0 8px 24px ${PRODUCT_COLORS[p.id]}55;
+          display:none;
+          width:120px; height:120px;
+          background:${PRODUCT_COLORS[p.id]};
+          border-radius:12px;
+          align-items:center; justify-content:center;
+          font-size:3rem;
+          box-shadow:0 8px 24px ${PRODUCT_COLORS[p.id]}55;
         ">${getProductEmoji(p.category)}</div>
       </div>
       <div class="card-body">
@@ -217,15 +286,32 @@ function renderProducts() {
         <h3 class="card-name">${p.name}</h3>
         <div class="card-footer">
           <span class="card-price">$${p.price.toFixed(2)}</span>
-          <button
-            class="add-to-cart"
-            id="atc-${p.id}"
-            onclick="addToCart('${p.id}')"
-          >Add to Cart</button>
+          <div class="qty-controls">
+            <button class="qty-btn" onclick="changeQty('${p.id}', -1)">−</button>
+            <span class="qty-display" id="qty-${p.id}">1</span>
+            <button class="qty-btn" onclick="changeQty('${p.id}', 1)">+</button>
+          </div>
         </div>
+        <button
+          class="add-to-cart"
+          id="atc-${p.id}"
+          onclick="addToCart('${p.id}')"
+        >Add to Cart</button>
       </div>
     </div>
   `).join('');
+}
+
+// ============================================
+//  QUANTITY CONTROLS
+// ============================================
+const selectedQty = {};
+
+function changeQty(productId, delta) {
+  if (!selectedQty[productId]) selectedQty[productId] = 1;
+  selectedQty[productId] = Math.max(1, Math.min(10, selectedQty[productId] + delta));
+  const el = document.getElementById(`qty-${productId}`);
+  if (el) el.textContent = selectedQty[productId];
 }
 
 // ============================================
@@ -235,16 +321,18 @@ function addToCart(productId) {
   const product = PRODUCTS.find(p => p.id === productId);
   if (!product) return;
 
+  const qty = selectedQty[productId] || 1;
   const existing = cart.find(i => i.id === productId);
+
   if (existing) {
-    existing.qty += 1;
+    existing.qty += qty;
   } else {
-    cart.push({ ...product, qty: 1 });
+    cart.push({ ...product, qty });
   }
 
   saveCart();
   updateCartUI();
-  fireAddToCart(product);
+  fireAddToCart({ ...product, qty });
 
   // Button feedback only — no sidebar popup
   const btn = document.getElementById(`atc-${productId}`);
@@ -256,12 +344,16 @@ function addToCart(productId) {
       btn.classList.remove('added');
     }, 1500);
   }
+
+  // Reset qty display to 1
+  selectedQty[productId] = 1;
+  const qtyEl = document.getElementById(`qty-${productId}`);
+  if (qtyEl) qtyEl.textContent = '1';
 }
 
 function removeFromCart(productId) {
   const item = cart.find(i => i.id === productId);
   if (!item) return;
-
   fireRemoveFromCart(item);
   cart = cart.filter(i => i.id !== productId);
   saveCart();
@@ -269,12 +361,10 @@ function removeFromCart(productId) {
 }
 
 function updateCartUI() {
-  // Count badge
   const totalQty = cart.reduce((sum, i) => sum + i.qty, 0);
   const badge = document.getElementById('cartCount');
   if (badge) badge.textContent = totalQty;
 
-  // Cart items list
   const cartItemsEl = document.getElementById('cartItems');
   const cartFooter  = document.getElementById('cartFooter');
   const cartTotalEl = document.getElementById('cartTotal');
@@ -291,7 +381,7 @@ function updateCartUI() {
     <div class="cart-item">
       <div class="cart-item-img">
         <img
-          src="assets/${item.id}.png"
+          src="${item.localImage}"
           alt="${item.name}"
           onerror="this.style.display='none'"
           style="width:40px;height:40px;object-fit:contain;border-radius:8px;"
@@ -299,7 +389,7 @@ function updateCartUI() {
       </div>
       <div class="cart-item-info">
         <p class="cart-item-name">${item.name}</p>
-        <p class="cart-item-price">$${item.price.toFixed(2)} × ${item.qty}</p>
+        <p class="cart-item-price">$${item.price.toFixed(2)} × ${item.qty} = <strong>$${(item.price * item.qty).toFixed(2)}</strong></p>
       </div>
       <button class="cart-item-remove" onclick="removeFromCart('${item.id}')">✕</button>
     </div>
@@ -307,8 +397,6 @@ function updateCartUI() {
 
   if (cartFooter) cartFooter.style.display = 'block';
   if (cartTotalEl) cartTotalEl.textContent = `$${getCartTotal().toFixed(2)}`;
-
-  // Pass cart to checkout via localStorage (already saved)
 }
 
 // ============================================
@@ -346,7 +434,7 @@ function renderCheckoutSummary() {
     <div class="summary-item">
       <div class="summary-item-img">
         <img
-          src="assets/${item.id}.png"
+          src="${item.localImage}"
           alt="${item.name}"
           onerror="this.style.display='none'"
           style="width:36px;height:36px;object-fit:contain;border-radius:6px;"
@@ -377,18 +465,13 @@ function placeOrder() {
   }
 
   const orderId = generateOrderId();
-
-  // Fire GA purchase event
   firePurchase(orderId);
 
-  // Show success modal
   const modal   = document.getElementById('modalOverlay');
   const orderEl = document.getElementById('orderId');
   if (orderEl) orderEl.textContent = orderId;
   if (modal)   modal.style.display = 'flex';
 
-  // Clear cart after purchase
-  // Small delay so GA event finishes sending before cart clears
   setTimeout(() => {
     cart = [];
     saveCart();
@@ -396,7 +479,7 @@ function placeOrder() {
 }
 
 // ============================================
-//  FADE-UP ANIMATION (CSS injection)
+//  FADE-UP ANIMATION
 // ============================================
 const style = document.createElement('style');
 style.textContent = `
@@ -408,19 +491,16 @@ style.textContent = `
 document.head.appendChild(style);
 
 // ============================================
-//  INIT — runs on every page
+//  INIT
 // ============================================
 document.addEventListener('DOMContentLoaded', () => {
   const isCheckout = document.body.classList.contains('checkout-page');
-
   updateCartUI();
 
   if (!isCheckout) {
-    // HOME PAGE
     renderProducts();
     fireViewItemList();
   } else {
-    // CHECKOUT PAGE
     renderCheckoutSummary();
     fireBeginCheckout();
   }
