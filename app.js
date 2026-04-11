@@ -469,11 +469,13 @@ function generateOrderId() {
   const ampm = hours >= 12 ? 'PM' : 'AM';
   hours = hours % 12 || 12;
 
-  const formattedDateTime = `${day}-${month}-${year}-${String(hours).padStart(2, '0')}-${minutes}-${ampm}`;
+  const seconds = String(now.getSeconds()).padStart(2, '0');
+  const ms = String(now.getMilliseconds()).padStart(3, '0');
+  const formattedDateTime = `${day}-${month}-${year}-${String(hours).padStart(2, '0')}-${minutes}-${seconds}-${ms}-${ampm}`;
 
   const random = Math.random().toString(36).substr(2, 10).toUpperCase();
 
-  return `ORD-${formattedDateTime}-${random}`;
+  return `ORDER-${formattedDateTime}-${random}`;
 }
 
 function placeOrder() {
