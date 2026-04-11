@@ -455,7 +455,23 @@ function renderCheckoutSummary() {
 }
 
 function generateOrderId() {
-  return 'ORD-' + Date.now() + '-' + Math.random().toString(36).substr(2, 5).toUpperCase();
+  const now = new Date();
+
+  const day = String(now.getDate()).padStart(2, '0');
+  const month = String(now.getMonth() + 1).padStart(2, '0');
+  const year = now.getFullYear();
+
+  let hours = now.getHours();
+  const minutes = String(now.getMinutes()).padStart(2, '0');
+
+  const ampm = hours >= 12 ? 'PM' : 'AM';
+  hours = hours % 12 || 12;
+
+  const formattedDateTime = `${day}-${month}-${year}-${String(hours).padStart(2, '0')}-${minutes}-${ampm}`;
+
+  const random = Math.random().toString(36).substr(2, 5).toUpperCase();
+
+  return `ORD-${formattedDateTime}-${random}`;
 }
 
 function placeOrder() {
