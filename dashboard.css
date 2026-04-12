@@ -142,23 +142,23 @@ body {
 
 /* ============ EMBED ============ */
 .dash-embed-section {
-  padding: 2rem;
-  max-width: 1200px;
+  padding: 2rem 2rem 0 2rem;
+  max-width: 1430px;
   margin: 0 auto;
 }
 
 .dash-embed-wrap {
   background: var(--white);
-  border-radius: 16px;
+  border-radius: 4px;
   border: 1px solid var(--border);
-  overflow: hidden;
+  overflow-x: hidden;
   box-shadow: 0 4px 24px rgba(0,0,0,0.06);
 }
 
 .dash-embed-wrap iframe {
   display: block;
-  width: 100%;
-  min-height: 800px;
+  width: 1366px;
+  height: 768px;
   border: none;
 }
 
