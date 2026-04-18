@@ -218,7 +218,6 @@ body {
     border-radius: 8px;
     overflow: hidden;
     position: relative;
-    /* Scale the 1366px iframe down to fit the screen */
     width: 100%;
   }
 
