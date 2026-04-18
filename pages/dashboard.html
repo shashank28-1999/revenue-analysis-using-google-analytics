@@ -76,6 +76,14 @@
       <p>Built by Google Lookerstudio</p>
     </div>
   </footer>
-
+<script>
+  function scaleIframe() {
+    var scale = window.innerWidth / 1366;
+    document.querySelector('.dash-embed-wrap').style.setProperty('--iframe-scale', scale);
+    document.querySelector('.dash-embed-wrap').style.height = (768 * scale) + 'px';
+  }
+  scaleIframe();
+  window.addEventListener('resize', scaleIframe);
+</script>
 </body>
 </html>

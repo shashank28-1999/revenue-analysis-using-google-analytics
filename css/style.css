@@ -797,7 +797,20 @@ body {
    RESPONSIVE
    ============================================ */
 @media (max-width: 768px) {
-  .nav-links { display: none; }
+  .nav-links {
+    display: flex;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    margin-left: 0;
+    gap: 1rem;
+    flex-shrink: 1;
+    min-width: 0;
+  }
+  .nav-links::-webkit-scrollbar { display: none; }
+  .nav-links a { white-space: nowrap; font-size: 0.8rem; }
+  .header-inner { gap: 1rem; padding: 0 1rem; }
+  .logo { font-size: 1.2rem; flex-shrink: 0; }
 
   .checkout-grid {
     grid-template-columns: 1fr;
