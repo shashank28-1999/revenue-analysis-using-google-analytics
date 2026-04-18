@@ -682,6 +682,14 @@
       .what-grid { grid-template-columns: 1fr; }
       .stats-grid { grid-template-columns: repeat(2, 1fr); }
       .events-grid { grid-template-columns: 1fr; }
+      .scroll-indicator {
+    left: 0;
+    right: 0;
+    transform: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
     }
     .material-scroll {
   display: flex;
