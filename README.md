@@ -3,7 +3,7 @@
 An e-commerce store built to demonstrate real-time revenue tracking 
 using Google Analytics 4 (GA4).
 
-🔗 **Live Site:** [https://sarge-code.github.io/revenue-analysis-using-google-analytics/](https://sarge-code.github.io/revenue-analysis-using-google-analytics/)
+🔗 **Live Site:** [https://SARGE2899.github.io/revenue-analysis-using-google-analytics/]
 
 ---
 
